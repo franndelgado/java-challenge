@@ -24,15 +24,31 @@ public class PointOfSaleService {
         pointOfSaleList.add(new PointOfSale(10, "Catamarca"));
     }
 
+    /**
+     * <b>GET Method:</b><br>
+     * This method gets the List of point of sale and returns it.
+     * @return List<PointOfSale>
+     */
     public List<PointOfSale> getPointOfSale() {
         return pointOfSaleList;
     }
 
+    /**
+     * <b>POST Method:</b><br>
+     * This method receives a PointOfSale and adds it to the point Of Sale List.
+     * @param pointOfSale
+     */
     public void createNewPointOfSale(PointOfSale pointOfSale) {
         pointOfSaleList.add(pointOfSale);
     }
 
+    /**
+     * <b>PUT Method:</b><br>
+     * This method receives a PointOfSale and updates it.
+     * @param pointOfSale
+     */
     public void updatePointOfSale(PointOfSale pointOfSale) {
+
         for(PointOfSale pos : pointOfSaleList) {
             if(pos.getId() == pointOfSale.getId()) {
                 pos.setName(pointOfSale.getName());
@@ -40,6 +56,11 @@ public class PointOfSaleService {
         }
     }
 
+    /**
+     * <b>DELETE Method:</b><br>
+     * This method receives a point of sale identifier and removes it.
+     * @param pointOfSaleId
+     */
     public void deletePointOfSale(int pointOfSaleId) {
         pointOfSaleList.removeIf(pointOfSale -> pointOfSale.getId() == pointOfSaleId);
     }

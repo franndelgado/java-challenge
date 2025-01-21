@@ -81,7 +81,7 @@ class CostServiceTest {
     @Test
     void testNewSearchPointOfSaleCost(){
 
-        String result = costService.newSearchPointOfSaleCost(6);
+        String result = costService.searchPointOfSaleCost(6);
         assertTrue(result.contains("Id 6 has direct path to Id 7 with cost: 32"));
     }
 }

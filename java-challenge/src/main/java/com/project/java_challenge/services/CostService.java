@@ -27,14 +27,32 @@ public class CostService {
         costsList.add(new PointOfSaleCost(4,6,6));
     }
 
+    /**
+     * GET Method:
+     * This method gets the List of costs and returns it.
+     * @return List<PointOfSaleCost>
+     */
     public List<PointOfSaleCost> getCostsList() {
         return costsList;
     }
 
+    /**
+     * POST Method:
+     * This method receives a PointOfSaleCost and adds it to the List of costs.
+     * @param pointOfSaleCost
+     */
     public void createNewPointOfSaleCost(PointOfSaleCost pointOfSaleCost){
         costsList.add(pointOfSaleCost);
     }
 
+    /**
+     * <b>DELETE Method:</b><br>
+     * This method receives idA and idB and iterates through the list of cost, if it finds both parameters it deletes
+     * the object. Otherwise, returns error message.
+     * @param idA
+     * @param idB
+     * @return String
+     */
     public String deletePointOfSaleCost(int idA, int idB){
 
         for(PointOfSaleCost pointOfSaleCost : costsList) {
@@ -48,18 +66,13 @@ public class CostService {
     }
 
     /**
-    public List<PointOfSaleCost> searchPointOfSaleCosts(int idA){
-        List<PointOfSaleCost> costsList1 = new ArrayList<>();
-        for(PointOfSaleCost pointOfSaleCost : costsList){
-            if(pointOfSaleCost.getIdA() == idA || pointOfSaleCost.getIdB() == idA){
-                costsList1.add(pointOfSaleCost);
-            }
-        }
-        return costsList1;
-    }
+     * GET Method:
+     * This receives an id and search in the list of costs for matches.
+     * Returns a string with the number of direct path and their costs.
+     * @param id
+     * @return String
      */
-
-    public String newSearchPointOfSaleCost(int id){
+    public String searchPointOfSaleCost(int id){
 
         StringBuilder finalResponse = new StringBuilder();
         for(PointOfSaleCost pointOfSaleCost : costsList) {
@@ -71,35 +84,4 @@ public class CostService {
         }
         return finalResponse.toString();
     }
-
-    /**
-    public List<PointOfSaleCost> getMinCost(int idA, int idB) {
-
-        if(getList(idA, idB).isEmpty()){
-
-        }
-        else{
-
-        }
-    }
-     */
-
-
-    /**
-    public List<PointOfSaleCost> getList(int idA, int idB) {
-        List<PointOfSaleCost> costsListFilter = new ArrayList<>();
-
-        for(PointOfSaleCost pointOfSaleCost : costsList) {
-            if ((pointOfSaleCost.getIdA() == idA || pointOfSaleCost.getIdA() == idB) &&
-                    (pointOfSaleCost.getIdB() == idB || pointOfSaleCost.getIdB() == idA)) {
-                costsListFilter.add(pointOfSaleCost);
-            }
-        }
-        return costsListFilter;
-    }
-
-     Stream<Integer> costos = searchPointOfSaleCosts(id).stream().map(costs -> costs.getCost());
-     searchPointOfSaleCosts(id).stream().filter(lista -> lista.getCost() == costos).findFirst();
-
-     */
 }

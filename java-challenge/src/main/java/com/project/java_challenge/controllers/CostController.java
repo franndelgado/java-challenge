@@ -33,22 +33,8 @@ public class CostController {
         return costService.deletePointOfSaleCost(idA, idB);
     }
 
-    /**
-    @GetMapping("/{idA}")
-    public List<PointOfSaleCost> getCostById(@PathVariable int idA){
-        return costService.searchPointOfSaleCosts(idA);
-    }
-     */
-
     @GetMapping("/search/{id}")
     public String newSearchPointOfSaleCost(@PathVariable int id){
-        return costService.newSearchPointOfSaleCost(id);
+        return costService.searchPointOfSaleCost(id);
     }
-
-    /**
-    @GetMapping("/testing")
-    public List<PointOfSaleCost> testing(@RequestParam int idA, @RequestParam int idB){
-        return costService.getList(idA, idB);
-    }
-    */
 }

@@ -2,9 +2,9 @@ package com.project.java_challenge.dtos;
 
 public class PointOfSaleCost {
 
-    private int idA;
-    private int idB;
-    private int cost;
+    private final int idA;
+    private final int idB;
+    private final int cost;
 
     public PointOfSaleCost(int idA, int idB, int cost) {
         this.idA = idA;
