@@ -8,9 +8,9 @@
 ## Pruebas de Postman:
 
 ### Parte 1: Caché en memoria Puntos de venta
--**Metodo:** GET
--**URL:** [localhost:8080/point-of-sale](http://localhost:8080/point-of-sale)
--**Respuesta:**
+- **Metodo**: GET
+- **URL**: (http://localhost:8080/point-of-sale)
+- **Respuesta**:
 [
     {
         "id": 1,
@@ -27,24 +27,68 @@
     ...
 ]
 
--**Metodo:** POST
--**Request Body Example**:
+- **Metodo**: POST
+- **Request Body Example**:
 {
     "id": 22,
     "name": "Chaco"
 }
--**URL:** [localhost:8080/point-of-sale](http://localhost:8080/point-of-sale)
--**Respuesta:** Successfully Created.
+- **URL**: [localhost:8080/point-of-sale](http://localhost:8080/point-of-sale)
+- **Respuesta**: Successfully Created.
 
--**Metodo:** DELETE
--**URL:** [localhost:8080/point-of-sale](http://localhost:8080/point-of-sale/{id})
--**Respuesta:** Successfully Deleted.
+- **Metodo**: DELETE
+- **URL**: [localhost:8080/point-of-sale](http://localhost:8080/point-of-sale/{id})
+- **Respuesta**: Successfully Deleted.
 
--**Metodo:** PUT
--**Request Body Example**:
+- **Metodo**: PUT
+- **Request Body Example**:
 {
     "id": 3,
     "name": "Chaco"
 }
--**URL:** [localhost:8080/point-of-sale](http://localhost:8080/point-of-sale)
--**Respuesta:** Successfully Updated.
+- **URL**: [localhost:8080/point-of-sale](http://localhost:8080/point-of-sale)
+- **Respuesta**: Successfully Updated.
+
+### Parte 2: Caché en memoria Puntos de Costos
+
+- **Método**: GET
+- **URL**: (http://localhost:8080/costs)
+- **Respuesta**:
+  [
+    {
+        "idA": 1,
+        "idB": 2,
+        "cost": 2
+    },
+    {
+        "idA": 1,
+        "idB": 3,
+        "cost": 3
+    },...
+  ]
+
+
+- **Metodo**: POST
+- **Request Body Example**:
+{
+    "idA": 10,
+    "idB": 9,
+    "cost": 100
+}
+- **URL**: http://localhost:8080/costs
+- **Respuesta**: New cost added.
+
+- **Metodo**: DELETE
+- **Parametros ejemplo:**
+      -**idA**: 1
+      -**idB**: 2
+-**URL con parámetros incluidos**: http://localhost:8080/costs?idA=1&idB=2
+-**Respuesta en caso de éxito**: Cost between id 1 and id 2 has been deleted.
+-**Respuesta en caso de que no exista relación**: There is no direct path between id 1 and id 90.
+
+- **Método**: GET
+- **URL**: (localhost:8080/costs/search/{id})
+- **Respuesta**: Id {id} has direct path to Id X with cost: X
+                 Id {id} has direct path to Id X with cost: X
+                 ...
+  
