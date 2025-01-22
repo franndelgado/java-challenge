@@ -50,12 +50,4 @@ public class Accreditation {
     public void setPointOfSaleId(int pointOfSaleId) {
         this.pointOfSaleId = pointOfSaleId;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 }

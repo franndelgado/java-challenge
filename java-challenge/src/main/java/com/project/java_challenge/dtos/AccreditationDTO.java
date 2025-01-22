@@ -1,6 +1,7 @@
 package com.project.java_challenge.dtos;
 
 public class AccreditationDTO {
+
     private int pointOfSaleId;
     private Long amount;
 

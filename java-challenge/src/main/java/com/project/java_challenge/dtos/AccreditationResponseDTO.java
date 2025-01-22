@@ -20,34 +20,16 @@ public class AccreditationResponseDTO {
         return amount;
     }
 
-    public void setAmount(Long amount) {
-        this.amount = amount;
-    }
-
     public LocalDate getDate() {
         return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
     }
 
     public int getPointOfSaleId() {
         return pointOfSaleId;
     }
 
-    public void setPointOfSaleId(int pointOfSaleId) {
-        this.pointOfSaleId = pointOfSaleId;
-    }
-
     public String getPointOfSaleName() {
         return pointOfSaleName;
     }
 
-    public void setPointOfSaleName(String pointOfSaleName) {
-        this.pointOfSaleName = pointOfSaleName;
-    }
-
-    public AccreditationResponseDTO(AccreditationDTO accreditationDTO) {
-    }
 }

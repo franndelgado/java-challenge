@@ -1,5 +1,6 @@
 package com.project.java_challenge.services;
 
+ import com.project.java_challenge.dtos.AccreditationDTO;
  import com.project.java_challenge.dtos.AccreditationResponseDTO;
  import com.project.java_challenge.dtos.PointOfSale;
  import com.project.java_challenge.entities.Accreditation;
@@ -33,16 +34,16 @@ public class AccreditationService {
         new PointOfSale(10, "Catamarca")
     );
     
-    public AccreditationResponseDTO processAccreditation(int pointOfSaleId, Long amount) {
+    public AccreditationResponseDTO processAccreditation(AccreditationDTO accreditationDTO) {
 
         PointOfSale pointOfSale = pointOfSaleList.stream()
-                .filter(pos -> pos.getId() == pointOfSaleId)
+                .filter(pos -> pos.getId() == accreditationDTO.getPointOfSaleId())
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Point of sale does not exist."));
 
         Accreditation newAccreditation = new Accreditation();
-        newAccreditation.setPointOfSaleId(pointOfSaleId);
-        newAccreditation.setAmount(amount);
+        newAccreditation.setPointOfSaleId(accreditationDTO.getPointOfSaleId());
+        newAccreditation.setAmount(accreditationDTO.getAmount());
         newAccreditation.setDate(LocalDate.now());
         newAccreditation.setPointOfSaleName(pointOfSale.getName());
 
@@ -54,17 +55,5 @@ public class AccreditationService {
                 accreditationSaved.getDate(),
                 accreditationSaved.getPointOfSaleName()
         );
-    }
-
-    public void testDataBase(){
-        Accreditation accreditation = new Accreditation();
-        accreditation.setId(3);
-        accreditation.setPointOfSaleId(3);
-        accreditation.setAmount(4000L);
-        accreditation.setPointOfSaleName("Chaco");
-        accreditation.setDate(LocalDate.now());
-
-        accreditationRepository.save(accreditation);
-        System.out.println();
     }
 }

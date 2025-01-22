@@ -27,8 +27,6 @@ class PointOfSaleControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    private PointOfSaleService pointOfSaleService;
-
     private List<PointOfSale> pointOfSaleList;
 
     @Autowired
@@ -73,7 +71,6 @@ class PointOfSaleControllerTest {
     void controllerTestUpdatePointOfSale() throws Exception {
 
         PointOfSale pointOfSale = new PointOfSale(11, "Chaco");
-        String jsonPointOfSale = objectMapper.writeValueAsString(pointOfSale);
 
         mockMvc.perform(MockMvcRequestBuilders.put("/point-of-sale")
         .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(pointOfSale))
