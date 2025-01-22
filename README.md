@@ -9,7 +9,7 @@
 
 ### Parte 1: Caché en memoria Puntos de venta
 - **Metodo**: GET
-- **URL**: (http://localhost:8080/point-of-sale)
+- **URL**: `http://localhost:8080/point-of-sale`
 - **Respuesta**:
 [
     {
@@ -35,11 +35,11 @@
     "id": 22,
     "name": "Chaco"
 }
-- **URL**: [localhost:8080/point-of-sale](http://localhost:8080/point-of-sale)
+- **URL**: `http://localhost:8080/point-of-sale`
 - **Respuesta**: Successfully Created.
 ---
 - **Metodo**: DELETE
-- **URL**: [localhost:8080/point-of-sale](http://localhost:8080/point-of-sale/{id})
+- **URL**: `http://localhost:8080/point-of-sale/{id}`
 - **Respuesta**: Successfully Deleted.
 ---
 - **Metodo**: PUT
@@ -48,13 +48,13 @@
     "id": 3,
     "name": "Chaco"
 }
-- **URL**: [localhost:8080/point-of-sale](http://localhost:8080/point-of-sale)
+- **URL**: `http://localhost:8080/point-of-sale`
 - **Respuesta**: Successfully Updated.
 ---
 ### Parte 2: Caché en memoria Puntos de Costos
 
 - **Método**: GET
-- **URL**: (http://localhost:8080/costs)
+- **URL**: `http://localhost:8080/costs`
 - **Respuesta**:
   [
     {
@@ -77,35 +77,36 @@
     "idB": 9,
     "cost": 100
 }
-- **URL**: http://localhost:8080/costs
+- **URL**: `http://localhost:8080/costs`
 - **Respuesta**: New cost added.
 ---
 - **Metodo**: DELETE
 - **Parametros ejemplo:**
       -**idA**: 1
       -**idB**: 2
--**URL con parámetros incluidos**: http://localhost:8080/costs?idA=1&idB=2
+-**URL con parámetros incluidos**: `http://localhost:8080/costs?idA=1&idB=2`
 -**Respuesta en caso de éxito**: Cost between id 1 and id 2 has been deleted.
 -**Respuesta en caso de que no exista relación**: There is no direct path between id 1 and id 90.
 
 - **Método**: GET
-- **URL**: (http://localhost:8080/costs/search/{id})
+- **URL**: `http://localhost:8080/costs/search/{id}`
 - **Respuesta**: Id {id} has direct path to Id X with cost: X
                  Id {id} has direct path to Id X with cost: X
                  ...
   
 ---
+---
 
 ### Parte 3: Acreditaciones
 
--**Método**: POST
--**URL**: http://localhost:8080/accreditations
--**Request Body Example**:
+- **Método**: POST
+- **URL**: `http://localhost:8080/accreditations`
+- **Request Body Example**:
 {
     "pointOfSaleId": 2,
     "amount": 1000
 }
--**Respuesta**:
+- **Respuesta**:
 {
     "pointOfSaleId": 2,
     "amount": 1000,
