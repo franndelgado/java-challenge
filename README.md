@@ -27,6 +27,8 @@
     ...
 ]
 
+---
+
 - **Metodo**: POST
 - **Request Body Example**:
 {
@@ -35,11 +37,11 @@
 }
 - **URL**: [localhost:8080/point-of-sale](http://localhost:8080/point-of-sale)
 - **Respuesta**: Successfully Created.
-
+---
 - **Metodo**: DELETE
 - **URL**: [localhost:8080/point-of-sale](http://localhost:8080/point-of-sale/{id})
 - **Respuesta**: Successfully Deleted.
-
+---
 - **Metodo**: PUT
 - **Request Body Example**:
 {
@@ -48,7 +50,7 @@
 }
 - **URL**: [localhost:8080/point-of-sale](http://localhost:8080/point-of-sale)
 - **Respuesta**: Successfully Updated.
-
+---
 ### Parte 2: Caché en memoria Puntos de Costos
 
 - **Método**: GET
@@ -67,7 +69,7 @@
     },...
   ]
 
-
+---
 - **Metodo**: POST
 - **Request Body Example**:
 {
@@ -77,7 +79,7 @@
 }
 - **URL**: http://localhost:8080/costs
 - **Respuesta**: New cost added.
-
+---
 - **Metodo**: DELETE
 - **Parametros ejemplo:**
       -**idA**: 1
@@ -87,8 +89,26 @@
 -**Respuesta en caso de que no exista relación**: There is no direct path between id 1 and id 90.
 
 - **Método**: GET
-- **URL**: (localhost:8080/costs/search/{id})
+- **URL**: (http://localhost:8080/costs/search/{id})
 - **Respuesta**: Id {id} has direct path to Id X with cost: X
                  Id {id} has direct path to Id X with cost: X
                  ...
   
+---
+
+### Parte 3: Acreditaciones
+
+-**Método**: POST
+-**URL**: http://localhost:8080/accreditations
+-**Request Body Example**:
+{
+    "pointOfSaleId": 2,
+    "amount": 1000
+}
+-**Respuesta**:
+{
+    "pointOfSaleId": 2,
+    "amount": 1000,
+    "date": "2025-01-22",
+    "pointOfSaleName": "GBA_1"
+}
