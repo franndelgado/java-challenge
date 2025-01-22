@@ -1,36 +1,23 @@
 package com.project.java_challenge.entities;
-/**
 
- import jakarta.persistence.Column;
- import jakarta.persistence.Entity;
- import jakarta.persistence.Id;
- import jakarta.persistence.Table;
+ import jakarta.persistence.*;
 
  import java.time.LocalDate;
 
 @Entity
-@Table(name = "accreditations")
 public class Accreditation {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column
+    private int pointOfSaleId;
+
     private Long amount;
 
-    @Column
     private String pointOfSaleName;
 
-    @Column
-    private LocalDate date;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    private LocalDate receptionDate;
 
     public Long getAmount() {
         return amount;
@@ -49,11 +36,26 @@ public class Accreditation {
     }
 
     public LocalDate getDate() {
-        return date;
+        return receptionDate;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setDate(LocalDate receptionDate) {
+        this.receptionDate = receptionDate;
+    }
+
+    public int getPointOfSaleId() {
+        return pointOfSaleId;
+    }
+
+    public void setPointOfSaleId(int pointOfSaleId) {
+        this.pointOfSaleId = pointOfSaleId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
-*/

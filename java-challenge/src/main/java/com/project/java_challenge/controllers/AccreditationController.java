@@ -1,14 +1,15 @@
 package com.project.java_challenge.controllers;
-/**
- import com.project.java_challenge.entities.Accreditation;
- import com.project.java_challenge.services.AccreditationService;
- import org.springframework.web.bind.annotation.PostMapping;
- import org.springframework.web.bind.annotation.RequestMapping;
- import org.springframework.web.bind.annotation.RestController;
 
- @RestController
- @RequestMapping("/accreditations")
- public class AccreditationController {
+ import com.project.java_challenge.dtos.AccreditationResponseDTO;
+ import com.project.java_challenge.services.AccreditationService;
+ import org.springframework.http.HttpStatus;
+ import org.springframework.http.MediaType;
+ import org.springframework.http.ResponseEntity;
+ import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/accreditations")
+public class AccreditationController {
 
     private final AccreditationService accreditationService;
 
@@ -16,16 +17,15 @@ package com.project.java_challenge.controllers;
         this.accreditationService = accreditationService;
     }
 
-
-    @PostMapping
-    public ResponseEntity<AccreditationResponseDTO> addNewAccount(AccreditationDTO accreditationDTO) {
-        return new ResponseEntity<>(new AccreditationResponseDTO(accreditationDTO), HttpStatus.CREATED);
+    @GetMapping("/test")
+    public ResponseEntity<String> getTest() {
+        accreditationService.testDataBase();
+        return ResponseEntity.status(HttpStatus.OK).body("OK");
     }
 
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<AccreditationResponseDTO> addNewAccreditation(int pointOfSaleId, Long amount) {
 
-    @PostMapping
-    public Accreditation saveAccreditation(Accreditation accreditation) {
-        return accreditationService.saveAccreditation(accreditation);
+        return ResponseEntity.status(HttpStatus.CREATED).body(accreditationService.processAccreditation(pointOfSaleId, amount));
     }
 }
- */

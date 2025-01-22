@@ -2,7 +2,7 @@ package com.project.java_challenge.dtos;
 
 public class PointOfSale {
 
-    private final int id;
+    private int id;
     private String name;
 
     public PointOfSale(int id, String name) {
