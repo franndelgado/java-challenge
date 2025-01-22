@@ -90,7 +90,6 @@
 ---
 - **Metodo**: DELETE
 - **Parametros ejemplo:**
-<br>
        *idA*: 1
        *idB*: 2
 - **URL con parámetros incluidos**: `http://localhost:8080/costs?idA=1&idB=2`
