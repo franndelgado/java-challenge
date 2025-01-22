@@ -11,6 +11,7 @@
 - **Metodo**: GET
 - **URL**: `http://localhost:8080/point-of-sale`
 - **Respuesta**:
+```json
 [
     {
         "id": 1,
@@ -26,15 +27,17 @@
     },
     ...
 ]
-
+```
 ---
 
 - **Metodo**: POST
 - **Request Body Example**:
+```json
 {
     "id": 22,
     "name": "Chaco"
 }
+```
 - **URL**: `http://localhost:8080/point-of-sale`
 - **Respuesta**: Successfully Created.
 ---
@@ -44,10 +47,12 @@
 ---
 - **Metodo**: PUT
 - **Request Body Example**:
+```json
 {
     "id": 3,
     "name": "Chaco"
 }
+```
 - **URL**: `http://localhost:8080/point-of-sale`
 - **Respuesta**: Successfully Updated.
 ---
@@ -56,6 +61,7 @@
 - **Método**: GET
 - **URL**: `http://localhost:8080/costs`
 - **Respuesta**:
+```json
   [
     {
         "idA": 1,
@@ -68,25 +74,28 @@
         "cost": 3
     },...
   ]
-
+```
 ---
 - **Metodo**: POST
 - **Request Body Example**:
+```json
 {
     "idA": 10,
     "idB": 9,
     "cost": 100
 }
+```
 - **URL**: `http://localhost:8080/costs`
 - **Respuesta**: New cost added.
 ---
 - **Metodo**: DELETE
 - **Parametros ejemplo:**
-      -**idA**: 1
-      -**idB**: 2
--**URL con parámetros incluidos**: `http://localhost:8080/costs?idA=1&idB=2`
--**Respuesta en caso de éxito**: Cost between id 1 and id 2 has been deleted.
--**Respuesta en caso de que no exista relación**: There is no direct path between id 1 and id 90.
+<br>
+       *idA*: 1
+       *idB*: 2
+- **URL con parámetros incluidos**: `http://localhost:8080/costs?idA=1&idB=2`
+- **Respuesta en caso de éxito**: Cost between id 1 and id 2 has been deleted.
+- **Respuesta en caso de que no exista relación**: There is no direct path between id 1 and id 90.
 
 - **Método**: GET
 - **URL**: `http://localhost:8080/costs/search/{id}`
@@ -102,14 +111,18 @@
 - **Método**: POST
 - **URL**: `http://localhost:8080/accreditations`
 - **Request Body Example**:
+```json
 {
     "pointOfSaleId": 2,
     "amount": 1000
 }
+```
 - **Respuesta**:
+```json
 {
     "pointOfSaleId": 2,
     "amount": 1000,
     "date": "2025-01-22",
     "pointOfSaleName": "GBA_1"
 }
+```
