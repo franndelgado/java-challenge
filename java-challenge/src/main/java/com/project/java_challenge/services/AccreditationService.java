@@ -33,7 +33,15 @@ public class AccreditationService {
         new PointOfSale(9, "Santa Cruz"),
         new PointOfSale(10, "Catamarca")
     );
-    
+
+    /***
+     * POST Method:
+     * This method receives an AccreditationDTO and finds the Point of Sale with the Identifier, creates the Accreditation
+     * saves it in the Data Base and then returns the new Accreditation.
+     * If the point of sale doesn't exist throws an Illegal Argument Exception.
+     * @param accreditationDTO
+     * @return AccreditationResponseDTO
+     */
     public AccreditationResponseDTO processAccreditation(AccreditationDTO accreditationDTO) {
 
         PointOfSale pointOfSale = pointOfSaleList.stream()
