@@ -95,16 +95,13 @@
 - **URL con parámetros incluidos**: `http://localhost:8080/costs?idA=1&idB=2`
 - **Respuesta en caso de éxito**: Cost between id 1 and id 2 has been deleted.
 - **Respuesta en caso de que no exista relación**: There is no direct path between id 1 and id 90.
-
+---
 - **Método**: GET
 - **URL**: `http://localhost:8080/costs/search/{id}`
 - **Respuesta**: Id {id} has direct path to Id X with cost: X
                  Id {id} has direct path to Id X with cost: X
                  ...
-  
 ---
----
-
 ### Parte 3: Acreditaciones
 
 - **Método**: POST
