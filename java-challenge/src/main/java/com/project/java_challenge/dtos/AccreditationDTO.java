@@ -2,14 +2,14 @@ package com.project.java_challenge.dtos;
 
 public class AccreditationDTO {
 
-    private int pointOfSaleId;
+    private Integer pointOfSaleId;
     private Long amount;
 
-    public int getPointOfSaleId() {
+    public Integer getPointOfSaleId() {
         return pointOfSaleId;
     }
 
-    public void setPointOfSaleId(int pointOfSaleId) {
+    public void setPointOfSaleId(Integer pointOfSaleId) {
         this.pointOfSaleId = pointOfSaleId;
     }
 

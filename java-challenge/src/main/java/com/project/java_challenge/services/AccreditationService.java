@@ -10,13 +10,13 @@ package com.project.java_challenge.services;
 
  import java.time.LocalDate;
  import java.util.List;
+ import java.util.NoSuchElementException;
 
 @Service
 public class AccreditationService {
 
     private final AccreditationRepository accreditationRepository;
 
-    @Autowired
     public AccreditationService(AccreditationRepository accreditationRepository) {
         this.accreditationRepository = accreditationRepository;
     }
@@ -44,10 +44,14 @@ public class AccreditationService {
      */
     public AccreditationResponseDTO processAccreditation(AccreditationDTO accreditationDTO) {
 
+        if(accreditationDTO.getPointOfSaleId() == null || accreditationDTO.getAmount() == null) {
+            throw new IllegalArgumentException("Point of sale identifier and Amount cannot be null.");
+        }
+
         PointOfSale pointOfSale = pointOfSaleList.stream()
                 .filter(pos -> pos.getId() == accreditationDTO.getPointOfSaleId())
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Point of sale does not exist."));
+                .orElseThrow(() -> new NoSuchElementException("Point of sale does not exist."));
 
         Accreditation newAccreditation = new Accreditation();
         newAccreditation.setPointOfSaleId(accreditationDTO.getPointOfSaleId());

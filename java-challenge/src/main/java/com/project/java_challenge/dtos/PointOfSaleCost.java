@@ -2,25 +2,25 @@ package com.project.java_challenge.dtos;
 
 public class PointOfSaleCost {
 
-    private final int idA;
-    private final int idB;
-    private final int cost;
+    private final Integer idA;
+    private final Integer idB;
+    private final Integer cost;
 
-    public PointOfSaleCost(int idA, int idB, int cost) {
+    public PointOfSaleCost(Integer idA, Integer idB, Integer cost) {
         this.idA = idA;
         this.idB = idB;
         this.cost = cost;
     }
 
-    public int getIdA() {
+    public Integer getIdA() {
         return idA;
     }
 
-    public int getIdB() {
+    public Integer getIdB() {
         return idB;
     }
 
-    public int getCost() {
+    public Integer getCost() {
         return cost;
     }
 

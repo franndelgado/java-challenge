@@ -2,6 +2,7 @@ package com.project.java_challenge.controllers;
 
 import com.project.java_challenge.dtos.PointOfSaleCost;
 import com.project.java_challenge.services.CostService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,17 +25,31 @@ public class CostController {
 
     @PostMapping
     public ResponseEntity<String> addNewCost(@RequestBody PointOfSaleCost costBody){
-        costService.createNewPointOfSaleCost(costBody);
-        return ResponseEntity.ok("New cost added.");
+        try{
+            costService.createNewPointOfSaleCost(costBody);
+            return ResponseEntity.ok("Created new point of sale cost successfully.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+        }
     }
 
     @DeleteMapping
-    public String deleteCost(@RequestParam int idA, @RequestParam int idB){
-        return costService.deletePointOfSaleCost(idA, idB);
+    public ResponseEntity<String> deleteCost(@RequestParam int idA, @RequestParam int idB){
+        String result = costService.deletePointOfSaleCost(idA, idB);
+        if(result.startsWith("Cost between id")){
+            return ResponseEntity.ok(result);
+        } else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
+        }
     }
 
     @GetMapping("/search/{id}")
-    public String newSearchPointOfSaleCost(@PathVariable int id){
-        return costService.searchPointOfSaleCost(id);
+    public ResponseEntity<String> newSearchPointOfSaleCost(@PathVariable int id){
+        String result = costService.searchPointOfSaleCost(id);
+        if(!result.isEmpty()){
+            return ResponseEntity.ok(result);
+        } else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No cost found.");
+        }
     }
 }

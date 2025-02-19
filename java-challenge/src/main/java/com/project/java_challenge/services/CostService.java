@@ -42,7 +42,11 @@ public class CostService {
      * @param pointOfSaleCost
      */
     public void createNewPointOfSaleCost(PointOfSaleCost pointOfSaleCost){
-        costsList.add(pointOfSaleCost);
+        if(pointOfSaleCost.getIdA() == null || pointOfSaleCost.getIdB() == null || pointOfSaleCost.getCost() == null) {
+            throw new IllegalArgumentException("Point Of Sale Cost cannot be null.");
+        } else {
+            costsList.add(pointOfSaleCost);
+        }
     }
 
     /**
@@ -54,7 +58,6 @@ public class CostService {
      * @return String
      */
     public String deletePointOfSaleCost(int idA, int idB){
-
         for(PointOfSaleCost pointOfSaleCost : costsList) {
             if ((pointOfSaleCost.getIdA() == idA || pointOfSaleCost.getIdA() == idB) &&
                     (pointOfSaleCost.getIdB() == idB || pointOfSaleCost.getIdB() == idA)) {
@@ -62,7 +65,7 @@ public class CostService {
                 return String.format("Cost between id %d and id %d has been deleted.", idA, idB );
             }
         }
-        return String.format("There is no direct path between id %d and id %d.", idA, idB );
+        return String.format("There is no direct path between id %d and id %d .", idA, idB );
     }
 
     /**
@@ -73,6 +76,10 @@ public class CostService {
      * @return String
      */
     public String searchPointOfSaleCost(int id){
+
+        if(id <= 1){
+            throw new IllegalArgumentException("Id must be greater than 1.");
+        }
 
         StringBuilder finalResponse = new StringBuilder();
         for(PointOfSaleCost pointOfSaleCost : costsList) {

@@ -39,6 +39,14 @@ public class PointOfSaleService {
      * @param pointOfSale
      */
     public void createNewPointOfSale(PointOfSale pointOfSale) {
+        if(pointOfSale == null) {
+            throw new IllegalArgumentException("Point Of Sale cannot be null.");
+        } if(pointOfSale.getId() <= 0){
+            throw new IllegalArgumentException("Point Of Sale id cannot be less than 0.");
+        }
+        if(pointOfSale.getName() == null || pointOfSale.getName().isEmpty()){
+            throw new IllegalArgumentException("Point Of Sale name cannot be empty.");
+        }
         pointOfSaleList.add(pointOfSale);
     }
 
@@ -49,11 +57,11 @@ public class PointOfSaleService {
      */
     public void updatePointOfSale(PointOfSale pointOfSale) {
 
-        for(PointOfSale pos : pointOfSaleList) {
-            if(pos.getId() == pointOfSale.getId()) {
-                pos.setName(pointOfSale.getName());
-            }
-        }
+        PointOfSale existingPoint = pointOfSaleList.stream()
+                .filter(pos -> pos.getId() == pointOfSale.getId())
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Point Of Sale not found."));
+        existingPoint.setName(pointOfSale.getName());
     }
 
     /**
@@ -62,6 +70,9 @@ public class PointOfSaleService {
      * @param pointOfSaleId
      */
     public void deletePointOfSale(int pointOfSaleId) {
-        pointOfSaleList.removeIf(pointOfSale -> pointOfSale.getId() == pointOfSaleId);
+        boolean removed = pointOfSaleList.removeIf(pointOfSale -> pointOfSale.getId() == pointOfSaleId);
+        if(!removed){
+            throw new IllegalArgumentException("Point Of Sale does not exist.");
+        }
     }
 }
