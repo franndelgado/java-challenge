@@ -1,6 +1,6 @@
 package com.project.java_challenge.controllers;
 
-import com.project.java_challenge.dtos.PointOfSaleCost;
+import com.project.java_challenge.dtos.PointOfSaleCostDTO;
 import com.project.java_challenge.services.CostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +19,12 @@ public class CostController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PointOfSaleCost>> getAllCosts(){
+    public ResponseEntity<List<PointOfSaleCostDTO>> getAllCosts(){
         return ResponseEntity.ok(costService.getCostsList());
     }
 
     @PostMapping
-    public ResponseEntity<String> addNewCost(@RequestBody PointOfSaleCost costBody){
+    public ResponseEntity<String> addNewCost(@RequestBody PointOfSaleCostDTO costBody){
         try{
             costService.createNewPointOfSaleCost(costBody);
             return ResponseEntity.ok("Created new point of sale cost successfully.");

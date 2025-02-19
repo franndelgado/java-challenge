@@ -1,8 +1,7 @@
 package com.project.java_challenge.controllerTests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.java_challenge.dtos.PointOfSale;
-import com.project.java_challenge.services.PointOfSaleService;
+import com.project.java_challenge.dtos.PointOfSaleDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,29 +21,29 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc
 @SpringBootTest
-class PointOfSaleControllerTest {
+class PointOfSaleDTOControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    private List<PointOfSale> pointOfSaleList;
+    private List<PointOfSaleDTO> pointOfSaleDTOList;
 
     @Autowired
     private ObjectMapper objectMapper;
 
     @BeforeEach
     void setUp() {
-        pointOfSaleList = new ArrayList<>();
-        pointOfSaleList.add(new PointOfSale(1, "CABA"));
-        pointOfSaleList.add(new PointOfSale(2, "GBA_1"));
-        pointOfSaleList.add(new PointOfSale(3, "GBA_2"));
-        pointOfSaleList.add(new PointOfSale(4, "Santa Fe"));
-        pointOfSaleList.add(new PointOfSale(5, "Córdoba"));
-        pointOfSaleList.add(new PointOfSale(6, "Misiones"));
-        pointOfSaleList.add(new PointOfSale(7, "Salta"));
-        pointOfSaleList.add(new PointOfSale(8, "Chubut"));
-        pointOfSaleList.add(new PointOfSale(9, "Santa Cruz"));
-        pointOfSaleList.add(new PointOfSale(10, "Catamarca"));
+        pointOfSaleDTOList = new ArrayList<>();
+        pointOfSaleDTOList.add(new PointOfSaleDTO(1, "CABA"));
+        pointOfSaleDTOList.add(new PointOfSaleDTO(2, "GBA_1"));
+        pointOfSaleDTOList.add(new PointOfSaleDTO(3, "GBA_2"));
+        pointOfSaleDTOList.add(new PointOfSaleDTO(4, "Santa Fe"));
+        pointOfSaleDTOList.add(new PointOfSaleDTO(5, "Córdoba"));
+        pointOfSaleDTOList.add(new PointOfSaleDTO(6, "Misiones"));
+        pointOfSaleDTOList.add(new PointOfSaleDTO(7, "Salta"));
+        pointOfSaleDTOList.add(new PointOfSaleDTO(8, "Chubut"));
+        pointOfSaleDTOList.add(new PointOfSaleDTO(9, "Santa Cruz"));
+        pointOfSaleDTOList.add(new PointOfSaleDTO(10, "Catamarca"));
     }
 
     @Test
@@ -59,8 +58,8 @@ class PointOfSaleControllerTest {
     @Test
     void controllerTestPostNewPointOfSale() throws Exception {
 
-        PointOfSale pointOfSale = new PointOfSale(11, "Chaco");
-        String jsonPointOfSale = objectMapper.writeValueAsString(pointOfSale);
+        PointOfSaleDTO pointOfSaleDTO = new PointOfSaleDTO(11, "Chaco");
+        String jsonPointOfSale = objectMapper.writeValueAsString(pointOfSaleDTO);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/point-of-sale")
                         .contentType(MediaType.APPLICATION_JSON).content(jsonPointOfSale))
@@ -70,10 +69,10 @@ class PointOfSaleControllerTest {
     @Test
     void controllerTestUpdatePointOfSale() throws Exception {
 
-        PointOfSale pointOfSale = new PointOfSale(11, "Chaco");
+        PointOfSaleDTO pointOfSaleDTO = new PointOfSaleDTO(11, "Chaco");
 
         mockMvc.perform(MockMvcRequestBuilders.put("/point-of-sale")
-        .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(pointOfSale))
+        .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(pointOfSaleDTO))
         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }

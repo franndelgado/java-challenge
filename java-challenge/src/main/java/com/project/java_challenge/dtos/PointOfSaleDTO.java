@@ -1,11 +1,11 @@
 package com.project.java_challenge.dtos;
 
-public class PointOfSale {
+public class PointOfSaleDTO {
 
     private Integer id;
     private String name;
 
-    public PointOfSale(int id, String name) {
+    public PointOfSaleDTO(int id, String name) {
         this.id = id;
         this.name = name;
     }

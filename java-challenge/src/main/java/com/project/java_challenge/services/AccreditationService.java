@@ -2,10 +2,9 @@ package com.project.java_challenge.services;
 
  import com.project.java_challenge.dtos.AccreditationDTO;
  import com.project.java_challenge.dtos.AccreditationResponseDTO;
- import com.project.java_challenge.dtos.PointOfSale;
+ import com.project.java_challenge.dtos.PointOfSaleDTO;
  import com.project.java_challenge.entities.Accreditation;
  import com.project.java_challenge.repositories.AccreditationRepository;
- import org.springframework.beans.factory.annotation.Autowired;
  import org.springframework.stereotype.Service;
 
  import java.time.LocalDate;
@@ -21,17 +20,17 @@ public class AccreditationService {
         this.accreditationRepository = accreditationRepository;
     }
 
-    private final List<PointOfSale> pointOfSaleList = List.of(
-        new PointOfSale(1, "CABA"),
-        new PointOfSale(2, "GBA_1"),
-        new PointOfSale(3, "GBA_2"),
-        new PointOfSale(4, "Santa Fe"),
-        new PointOfSale(5, "Córdoba"),
-        new PointOfSale(6, "Misiones"),
-        new PointOfSale(7, "Salta"),
-        new PointOfSale(8, "Chubut"),
-        new PointOfSale(9, "Santa Cruz"),
-        new PointOfSale(10, "Catamarca")
+    private final List<PointOfSaleDTO> pointOfSaleDTOList = List.of(
+        new PointOfSaleDTO(1, "CABA"),
+        new PointOfSaleDTO(2, "GBA_1"),
+        new PointOfSaleDTO(3, "GBA_2"),
+        new PointOfSaleDTO(4, "Santa Fe"),
+        new PointOfSaleDTO(5, "Córdoba"),
+        new PointOfSaleDTO(6, "Misiones"),
+        new PointOfSaleDTO(7, "Salta"),
+        new PointOfSaleDTO(8, "Chubut"),
+        new PointOfSaleDTO(9, "Santa Cruz"),
+        new PointOfSaleDTO(10, "Catamarca")
     );
 
     /***
@@ -48,7 +47,7 @@ public class AccreditationService {
             throw new IllegalArgumentException("Point of sale identifier and Amount cannot be null.");
         }
 
-        PointOfSale pointOfSale = pointOfSaleList.stream()
+        PointOfSaleDTO pointOfSaleDTO = pointOfSaleDTOList.stream()
                 .filter(pos -> pos.getId() == accreditationDTO.getPointOfSaleId())
                 .findFirst()
                 .orElseThrow(() -> new NoSuchElementException("Point of sale does not exist."));
@@ -57,7 +56,7 @@ public class AccreditationService {
         newAccreditation.setPointOfSaleId(accreditationDTO.getPointOfSaleId());
         newAccreditation.setAmount(accreditationDTO.getAmount());
         newAccreditation.setDate(LocalDate.now());
-        newAccreditation.setPointOfSaleName(pointOfSale.getName());
+        newAccreditation.setPointOfSaleName(pointOfSaleDTO.getName());
 
         Accreditation accreditationSaved = accreditationRepository.save(newAccreditation);
 

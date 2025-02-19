@@ -1,7 +1,7 @@
 package com.project.java_challenge.controllerTests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.java_challenge.dtos.PointOfSaleCost;
+import com.project.java_challenge.dtos.PointOfSaleCostDTO;
 import com.project.java_challenge.services.CostService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,7 +26,7 @@ class CostControllerTest {
 
     private CostService costService;
 
-    private List<PointOfSaleCost> costsList;
+    private List<PointOfSaleCostDTO> costsList;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -35,20 +35,20 @@ class CostControllerTest {
     @BeforeEach
     void setUp() {
         costsList = new ArrayList<>();
-        costsList.add(new PointOfSaleCost(1,2,2));
-        costsList.add(new PointOfSaleCost(1,3,3));
-        costsList.add(new PointOfSaleCost(2,3,5));
-        costsList.add(new PointOfSaleCost(2,4,10));
-        costsList.add(new PointOfSaleCost(1,4,11));
-        costsList.add(new PointOfSaleCost(4,5,5));
-        costsList.add(new PointOfSaleCost(2,5,14));
-        costsList.add(new PointOfSaleCost(6,7,32));
-        costsList.add(new PointOfSaleCost(8,9,11));
-        costsList.add(new PointOfSaleCost(10,7,5));
-        costsList.add(new PointOfSaleCost(3,8,10));
-        costsList.add(new PointOfSaleCost(5,8,30));
-        costsList.add(new PointOfSaleCost(10,5,5));
-        costsList.add(new PointOfSaleCost(4,6,6));
+        costsList.add(new PointOfSaleCostDTO(1,2,2));
+        costsList.add(new PointOfSaleCostDTO(1,3,3));
+        costsList.add(new PointOfSaleCostDTO(2,3,5));
+        costsList.add(new PointOfSaleCostDTO(2,4,10));
+        costsList.add(new PointOfSaleCostDTO(1,4,11));
+        costsList.add(new PointOfSaleCostDTO(4,5,5));
+        costsList.add(new PointOfSaleCostDTO(2,5,14));
+        costsList.add(new PointOfSaleCostDTO(6,7,32));
+        costsList.add(new PointOfSaleCostDTO(8,9,11));
+        costsList.add(new PointOfSaleCostDTO(10,7,5));
+        costsList.add(new PointOfSaleCostDTO(3,8,10));
+        costsList.add(new PointOfSaleCostDTO(5,8,30));
+        costsList.add(new PointOfSaleCostDTO(10,5,5));
+        costsList.add(new PointOfSaleCostDTO(4,6,6));
     }
     @Test
     void controllerTestGetCostList() throws Exception {
@@ -62,7 +62,7 @@ class CostControllerTest {
     @Test
     void controllerTestPostNewCost() throws Exception {
 
-        PointOfSaleCost cost = new PointOfSaleCost(2,10,44);
+        PointOfSaleCostDTO cost = new PointOfSaleCostDTO(2,10,44);
         String jsonCost = objectMapper.writeValueAsString(cost);
 
         mockMvc.perform(post("/costs")
