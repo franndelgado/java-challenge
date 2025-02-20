@@ -12,6 +12,16 @@ public class PointOfSaleCost {
     private Integer idB;
     private Integer cost;
 
+    public PointOfSaleCost(Integer cost, Integer idA, Integer idB) {
+        this.cost = cost;
+        this.idA = idA;
+        this.idB = idB;
+    }
+
+    public PointOfSaleCost() {
+
+    }
+
     public Integer getCost() {
         return cost;
     }
