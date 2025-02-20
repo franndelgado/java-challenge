@@ -1,6 +1,7 @@
 package com.project.java_challenge.controllers;
 
 import com.project.java_challenge.dtos.PointOfSaleDTO;
+import com.project.java_challenge.entities.PointOfSale;
 import com.project.java_challenge.services.PointOfSaleService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,29 +19,19 @@ public class PointOfSaleController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PointOfSaleDTO>> getAllPointOfSale() {
+    public ResponseEntity<List<PointOfSale>> getAllPointOfSale() {
         return ResponseEntity.ok(pointOfSaleService.getPointOfSale());
     }
 
+
     @PostMapping
-    public ResponseEntity<String> addPointOfSale(@RequestBody PointOfSaleDTO pointOfSaleDTO) {
-        try{
-            pointOfSaleService.createNewPointOfSale(pointOfSaleDTO);
-            return ResponseEntity.ok("Created new point of sale successfully.");
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
-        }
+    public ResponseEntity<PointOfSale> addPointOfSale(@RequestBody PointOfSaleDTO pointOfSaleDTO) {
+        return ResponseEntity.ok(pointOfSaleService.createNewPointOfSale(pointOfSaleDTO));
     }
 
     @PutMapping
-    public ResponseEntity<String> updatePointOfSale(@RequestBody PointOfSaleDTO pointOfSaleDTO) {
-        if(pointOfSaleDTO == null) {
-            return ResponseEntity.badRequest().body("Point Of Sale is null");
-        }
-        else {
-        pointOfSaleService.updatePointOfSale(pointOfSaleDTO);
-        return ResponseEntity.ok("Successfully Updated.");
-        }
+    public ResponseEntity<PointOfSale> updatePointOfSale(@RequestBody PointOfSaleDTO pointOfSaleDTO) {
+        return ResponseEntity.ok(pointOfSaleService.updatePointOfSale(pointOfSaleDTO));
     }
 
     @DeleteMapping("/{id}")
