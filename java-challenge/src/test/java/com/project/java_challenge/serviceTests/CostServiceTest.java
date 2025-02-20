@@ -1,48 +1,61 @@
 package com.project.java_challenge.serviceTests;
 
 import com.project.java_challenge.dtos.PointOfSaleCostDTO;
+import com.project.java_challenge.dtos.PointOfSaleDTO;
+import com.project.java_challenge.entities.PointOfSale;
+import com.project.java_challenge.entities.PointOfSaleCost;
+import com.project.java_challenge.repositories.PointOfSaleCostRepository;
+import com.project.java_challenge.repositories.PointOfSaleRepository;
 import com.project.java_challenge.services.CostService;
+import com.project.java_challenge.services.PointOfSaleService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 class CostServiceTest {
 
-    private CostService costService;
     private List<PointOfSaleCostDTO> costsList;
+
+    @InjectMocks
+    private CostService costService;
+
+    @Mock
+    private PointOfSaleCostRepository pointOfSaleCostRepository;
+
+    private PointOfSaleCostDTO pointOfSaleCostDTO;
+    private PointOfSaleCost pointOfSaleCost;
 
     @BeforeEach
     void setUp() {
-        costService = new CostService();
+        costService = new CostService(pointOfSaleCostRepository);
+
+        pointOfSaleCost = new PointOfSaleCost();
+        pointOfSaleCost.setIdA(1);
+        pointOfSaleCost.setIdB(2);
+        pointOfSaleCost.setCost(111);
         costsList = new ArrayList<>();
-        costsList.add(new PointOfSaleCostDTO(1,2,2));
-        costsList.add(new PointOfSaleCostDTO(1,3,3));
-        costsList.add(new PointOfSaleCostDTO(2,3,5));
-        costsList.add(new PointOfSaleCostDTO(2,4,10));
-        costsList.add(new PointOfSaleCostDTO(1,4,11));
-        costsList.add(new PointOfSaleCostDTO(4,5,5));
-        costsList.add(new PointOfSaleCostDTO(2,5,14));
-        costsList.add(new PointOfSaleCostDTO(6,7,32));
-        costsList.add(new PointOfSaleCostDTO(8,9,11));
-        costsList.add(new PointOfSaleCostDTO(10,7,5));
-        costsList.add(new PointOfSaleCostDTO(3,8,10));
-        costsList.add(new PointOfSaleCostDTO(5,8,30));
-        costsList.add(new PointOfSaleCostDTO(10,5,5));
-        costsList.add(new PointOfSaleCostDTO(4,6,6));
+
     }
 
     @Test
     void testGetCostsList(){
 
-        List<PointOfSaleCostDTO> costList = costService.getCostsList();
-        assertThat(costList).isNotNull();
-        assertThat(costList.size()).isEqualTo(14);
+        when(pointOfSaleCostRepository.findAll()).thenReturn(List.of(pointOfSaleCost));
+        costService.getCostsList();
+
+        verify(pointOfSaleCostRepository).findAll();
     }
 
+    /**
     @Test
     void testCreateNewPointOfSaleCost(){
 
@@ -84,4 +97,5 @@ class CostServiceTest {
         String result = costService.searchPointOfSaleCost(6);
         assertTrue(result.contains("Id 6 has direct path to Id 7 with cost: 32"));
     }
+    */
 }

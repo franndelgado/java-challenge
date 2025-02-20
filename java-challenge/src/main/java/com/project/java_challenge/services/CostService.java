@@ -1,6 +1,8 @@
 package com.project.java_challenge.services;
 
 import com.project.java_challenge.dtos.PointOfSaleCostDTO;
+import com.project.java_challenge.entities.PointOfSaleCost;
+import com.project.java_challenge.repositories.PointOfSaleCostRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -8,23 +10,10 @@ import java.util.*;
 @Service
 public class CostService {
 
-    private final List<PointOfSaleCostDTO> costsList = new ArrayList<>();
+    private final PointOfSaleCostRepository pointOfSaleCostRepository;
 
-    public CostService(){
-        costsList.add(new PointOfSaleCostDTO(1,2,2));
-        costsList.add(new PointOfSaleCostDTO(1,3,3));
-        costsList.add(new PointOfSaleCostDTO(2,3,5));
-        costsList.add(new PointOfSaleCostDTO(2,4,10));
-        costsList.add(new PointOfSaleCostDTO(1,4,11));
-        costsList.add(new PointOfSaleCostDTO(4,5,5));
-        costsList.add(new PointOfSaleCostDTO(2,5,14));
-        costsList.add(new PointOfSaleCostDTO(6,7,32));
-        costsList.add(new PointOfSaleCostDTO(8,9,11));
-        costsList.add(new PointOfSaleCostDTO(10,7,5));
-        costsList.add(new PointOfSaleCostDTO(3,8,10));
-        costsList.add(new PointOfSaleCostDTO(5,8,30));
-        costsList.add(new PointOfSaleCostDTO(10,5,5));
-        costsList.add(new PointOfSaleCostDTO(4,6,6));
+    public CostService(PointOfSaleCostRepository pointOfSaleCostRepository) {
+        this.pointOfSaleCostRepository = pointOfSaleCostRepository;
     }
 
     /**
@@ -32,8 +21,8 @@ public class CostService {
      * This method gets the List of costs and returns it.
      * @return List<PointOfSaleCost>
      */
-    public List<PointOfSaleCostDTO> getCostsList() {
-        return costsList;
+    public List<PointOfSaleCost> getCostsList() {
+        return pointOfSaleCostRepository.findAll();
     }
 
     /**
@@ -41,11 +30,16 @@ public class CostService {
      * This method receives a PointOfSaleCost and adds it to the List of costs.
      * @param pointOfSaleCostDTO
      */
-    public void createNewPointOfSaleCost(PointOfSaleCostDTO pointOfSaleCostDTO){
-        if(pointOfSaleCostDTO.getIdA() == null || pointOfSaleCostDTO.getIdB() == null || pointOfSaleCostDTO.getCost() == null) {
+    public PointOfSaleCost createNewPointOfSaleCost(PointOfSaleCostDTO pointOfSaleCostDTO) {
+        if (pointOfSaleCostDTO.getIdA() == null || pointOfSaleCostDTO.getIdB() == null || pointOfSaleCostDTO.getCost() == null) {
             throw new IllegalArgumentException("Point Of Sale Cost cannot be null.");
         } else {
-            costsList.add(pointOfSaleCostDTO);
+            PointOfSaleCost newPointOfSaleCost = new PointOfSaleCost();
+            newPointOfSaleCost.setIdA(pointOfSaleCostDTO.getIdA());
+            newPointOfSaleCost.setIdB(pointOfSaleCostDTO.getIdB());
+            newPointOfSaleCost.setCost(pointOfSaleCostDTO.getCost());
+
+            return pointOfSaleCostRepository.save(newPointOfSaleCost);
         }
     }
 
@@ -58,12 +52,16 @@ public class CostService {
      * @return String
      */
     public String deletePointOfSaleCost(int idA, int idB){
-        for(PointOfSaleCostDTO pointOfSaleCostDTO : costsList) {
-            if ((pointOfSaleCostDTO.getIdA() == idA || pointOfSaleCostDTO.getIdA() == idB) &&
-                    (pointOfSaleCostDTO.getIdB() == idB || pointOfSaleCostDTO.getIdB() == idA)) {
-                costsList.remove(pointOfSaleCostDTO);
-                return String.format("Cost between id %d and id %d has been deleted.", idA, idB );
-            }
+
+        Optional<PointOfSaleCost> pointOfSaleCost = pointOfSaleCostRepository.findByIdAAndIdB(idA, idB);
+
+        if(pointOfSaleCost.isEmpty()){
+            pointOfSaleCost = pointOfSaleCostRepository.findByIdBAndIdA(idA, idB);
+        }
+
+        if(pointOfSaleCost.isPresent()){
+            pointOfSaleCostRepository.delete(pointOfSaleCost.get());
+            return "Successfully deleted pointOfSaleCost";
         }
         return String.format("There is no direct path between id %d and id %d .", idA, idB );
     }
@@ -75,18 +73,23 @@ public class CostService {
      * @param id
      * @return String
      */
-    public String searchPointOfSaleCost(int id){
+    public String searchPointOfSaleCost(Integer id){
 
-        if(id <= 1){
-            throw new IllegalArgumentException("Id must be greater than 1.");
+        if(id == null){
+            return String.valueOf(new IllegalArgumentException("Id is missing."));
         }
 
         StringBuilder finalResponse = new StringBuilder();
-        for(PointOfSaleCostDTO pointOfSaleCostDTO : costsList) {
-            if(pointOfSaleCostDTO.getIdA() == id){
-                finalResponse.append("Id ").append(id).append(" has direct path to Id ").append(pointOfSaleCostDTO.getIdB()).append(" with cost: ").append(pointOfSaleCostDTO.getCost()).append("\n");
-            } else if (pointOfSaleCostDTO.getIdB() == id) {
-                finalResponse.append("Id ").append(id).append(" has direct path to Id ").append(pointOfSaleCostDTO.getIdA()).append(" with cost: ").append(pointOfSaleCostDTO.getCost()).append("\n");
+        List<PointOfSaleCost> directPaths = pointOfSaleCostRepository.findByIdAOrIdB(id, id);
+
+        if(directPaths.isEmpty()){
+            return String.format("No direct path between id %d and id %d.", id, id);
+        }
+        for(PointOfSaleCost pointOfSaleCost : directPaths) {
+            if(Objects.equals(pointOfSaleCost.getIdA(), id)){
+                finalResponse.append("Id ").append(id).append(" has direct path to Id ").append(pointOfSaleCost.getIdB()).append(" with cost: ").append(pointOfSaleCost.getCost()).append("\n");
+            } else if (Objects.equals(pointOfSaleCost.getIdB(), id)) {
+                finalResponse.append("Id ").append(id).append(" has direct path to Id ").append(pointOfSaleCost.getIdA()).append(" with cost: ").append(pointOfSaleCost.getCost()).append("\n");
             }
         }
         return finalResponse.toString();

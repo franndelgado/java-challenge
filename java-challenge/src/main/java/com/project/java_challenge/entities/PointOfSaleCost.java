@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 public class PointOfSaleCost {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private Integer idA;
     private Integer idB;
