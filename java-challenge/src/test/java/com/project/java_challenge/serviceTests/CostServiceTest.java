@@ -1,13 +1,9 @@
 package com.project.java_challenge.serviceTests;
 
 import com.project.java_challenge.dtos.PointOfSaleCostDTO;
-import com.project.java_challenge.dtos.PointOfSaleDTO;
-import com.project.java_challenge.entities.PointOfSale;
 import com.project.java_challenge.entities.PointOfSaleCost;
 import com.project.java_challenge.repositories.PointOfSaleCostRepository;
-import com.project.java_challenge.repositories.PointOfSaleRepository;
 import com.project.java_challenge.services.CostService;
-import com.project.java_challenge.services.PointOfSaleService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -15,14 +11,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class CostServiceTest {
@@ -88,7 +81,6 @@ class CostServiceTest {
         assertEquals("There is no direct path between id 99 and id 9 .", stringResult);
     }
 
-    /**
     @Test
     void testNewSearchPointOfSaleCost(){
 
@@ -106,5 +98,4 @@ class CostServiceTest {
 
         assertEquals(expectedLines, result);
     }
-    */
 }
