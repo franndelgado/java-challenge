@@ -61,7 +61,7 @@ public class CostService {
 
         if(pointOfSaleCost.isPresent()){
             pointOfSaleCostRepository.delete(pointOfSaleCost.get());
-            return "Successfully deleted pointOfSaleCost";
+            return "Successfully deleted point Of Sale Cost.";
         }
         return String.format("There is no direct path between id %d and id %d .", idA, idB );
     }

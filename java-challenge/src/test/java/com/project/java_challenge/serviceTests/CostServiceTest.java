@@ -20,16 +20,11 @@ import static org.mockito.Mockito.when;
 
 class CostServiceTest {
 
-    private List<PointOfSaleCostDTO> costsList;
-
     @InjectMocks
     private CostService costService;
 
     @Mock
     private PointOfSaleCostRepository pointOfSaleCostRepository;
-
-    private PointOfSaleCostDTO pointOfSaleCostDTO;
-    private PointOfSaleCost pointOfSaleCost;
 
     @BeforeEach
     void setUp() {
@@ -68,7 +63,7 @@ class CostServiceTest {
 
         String stringResult = costService.deletePointOfSaleCost(1, 2);
 
-        assertEquals("Successfully deleted pointOfSaleCost", stringResult);
+        assertEquals("Successfully deleted point Of Sale Cost.", stringResult);
     }
 
     @Test

@@ -33,7 +33,7 @@ public class CostController {
     @DeleteMapping
     public ResponseEntity<String> deleteCost(@RequestParam int idA, @RequestParam int idB){
         String result = costService.deletePointOfSaleCost(idA, idB);
-        if(result.startsWith("Cost between id")){
+        if(result.startsWith("Successfully deleted point Of Sale Cost.")){
             return ResponseEntity.ok(result);
         } else{
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);

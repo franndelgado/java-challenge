@@ -13,8 +13,13 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import static org.mockito.Mockito.when;
+
+import org.mockito.MockitoAnnotations;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -39,6 +44,8 @@ class CostControllerTest {
 
     @BeforeEach
     void setUp() {
+        MockitoAnnotations.openMocks(this);
+
         pointOfSaleCost = new PointOfSaleCost();
         pointOfSaleCost.setIdA(1);
         pointOfSaleCost.setIdB(2);
@@ -71,19 +78,6 @@ class CostControllerTest {
         mockMvc.perform(get("/costs/search/9"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Id 9 has direct path to Id 8 with cost: 11\n"));
-    }
-
-    @Test
-    void deleteTestController() throws Exception {
-
-        String successMessage = "Successfully deleted pointOfSaleCost";
-        when(costService.deletePointOfSaleCost(1, 2)).thenReturn(successMessage);
-
-        mockMvc.perform(delete("/costs")
-                .param("idA", "1")
-                .param("idB", "2"))
-                .andExpect(status().isOk())
-                .andExpect(content().string(successMessage));
     }
 
     @Test

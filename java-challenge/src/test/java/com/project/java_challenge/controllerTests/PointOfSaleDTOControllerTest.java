@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.java_challenge.dtos.PointOfSaleDTO;
 import com.project.java_challenge.entities.PointOfSale;
 import com.project.java_challenge.repositories.PointOfSaleRepository;
-import com.project.java_challenge.services.PointOfSaleService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -26,22 +25,16 @@ class PointOfSaleDTOControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    private PointOfSaleService pointOfSaleService;
-
     @Mock
     private PointOfSaleRepository pointOfSaleRepository;
 
     @Autowired
     private ObjectMapper objectMapper;
 
-    private PointOfSaleDTO pointOfSaleDTO;
     private PointOfSale pointOfSale;
 
     @BeforeEach
     void setUp() {
-
-        pointOfSaleDTO = new PointOfSaleDTO(1, "Chaco");
-
         pointOfSale = new PointOfSale();
         pointOfSale.setId(1);
         pointOfSale.setName("CABA");
