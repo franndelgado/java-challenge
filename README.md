@@ -199,6 +199,7 @@ Para detener el proyecto, ejecuta:
 ]
 ```
 Para más facilidad el archivo "Challenge Java.postman collection.json" contienede la colección creada de Postman para probar cada endpoint.
+
 ---
 ## Documentación de la API
 
