@@ -2,7 +2,7 @@ package com.project.java_challenge.controllerTests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.java_challenge.dtos.PointOfSaleDTO;
-import com.project.java_challenge.entities.PointOfSale;
+import com.project.java_challenge.models.PointOfSale;
 import com.project.java_challenge.repositories.PointOfSaleRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

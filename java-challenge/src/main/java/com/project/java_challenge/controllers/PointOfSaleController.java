@@ -1,7 +1,7 @@
 package com.project.java_challenge.controllers;
 
 import com.project.java_challenge.dtos.PointOfSaleDTO;
-import com.project.java_challenge.entities.PointOfSale;
+import com.project.java_challenge.models.PointOfSale;
 import com.project.java_challenge.services.PointOfSaleService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

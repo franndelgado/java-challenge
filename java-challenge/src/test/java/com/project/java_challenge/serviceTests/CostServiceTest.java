@@ -1,7 +1,7 @@
 package com.project.java_challenge.serviceTests;
 
 import com.project.java_challenge.dtos.PointOfSaleCostDTO;
-import com.project.java_challenge.entities.PointOfSaleCost;
+import com.project.java_challenge.models.PointOfSaleCost;
 import com.project.java_challenge.repositories.PointOfSaleCostRepository;
 import com.project.java_challenge.services.CostService;
 import org.junit.jupiter.api.BeforeEach;

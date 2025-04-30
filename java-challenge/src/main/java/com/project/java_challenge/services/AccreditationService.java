@@ -3,7 +3,7 @@ package com.project.java_challenge.services;
  import com.project.java_challenge.dtos.AccreditationDTO;
  import com.project.java_challenge.dtos.AccreditationResponseDTO;
  import com.project.java_challenge.dtos.PointOfSaleDTO;
- import com.project.java_challenge.entities.Accreditation;
+ import com.project.java_challenge.models.Accreditation;
  import com.project.java_challenge.repositories.AccreditationRepository;
  import org.springframework.stereotype.Service;
 

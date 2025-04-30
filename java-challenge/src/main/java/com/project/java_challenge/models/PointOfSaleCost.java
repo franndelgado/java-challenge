@@ -1,4 +1,4 @@
-package com.project.java_challenge.entities;
+package com.project.java_challenge.models;
 
 import jakarta.persistence.*;
 

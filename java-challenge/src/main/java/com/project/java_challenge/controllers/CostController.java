@@ -1,7 +1,7 @@
 package com.project.java_challenge.controllers;
 
 import com.project.java_challenge.dtos.PointOfSaleCostDTO;
-import com.project.java_challenge.entities.PointOfSaleCost;
+import com.project.java_challenge.models.PointOfSaleCost;
 import com.project.java_challenge.services.CostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
