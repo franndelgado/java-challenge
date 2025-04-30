@@ -1,7 +1,10 @@
 package com.project.java_challenge.dtos;
 
+ import lombok.Getter;
+
  import java.time.LocalDate;
 
+@Getter
 public class AccreditationResponseDTO {
 
     private int pointOfSaleId;
@@ -14,22 +17,6 @@ public class AccreditationResponseDTO {
         this.amount = amount;
         this.date = date;
         this.pointOfSaleName = pointOfSaleName;
-    }
-
-    public Long getAmount() {
-        return amount;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public int getPointOfSaleId() {
-        return pointOfSaleId;
-    }
-
-    public String getPointOfSaleName() {
-        return pointOfSaleName;
     }
 
 }

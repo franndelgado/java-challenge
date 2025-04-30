@@ -1,16 +1,20 @@
 package com.project.java_challenge.controllers;
 
+import com.project.java_challenge.api.PointOfSaleApi;
 import com.project.java_challenge.dtos.PointOfSaleDTO;
-import com.project.java_challenge.entities.PointOfSale;
+import com.project.java_challenge.exceptions.PointOfSaleNotFoundException;
+import com.project.java_challenge.models.PointOfSale;
 import com.project.java_challenge.services.PointOfSaleService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/point-of-sale")
-public class PointOfSaleController {
+@RequestMapping("/api/point-of-sale")
+public class PointOfSaleController implements PointOfSaleApi {
 
     private final PointOfSaleService pointOfSaleService;
 
@@ -18,30 +22,33 @@ public class PointOfSaleController {
         this.pointOfSaleService = pointOfSaleService;
     }
 
+    @Override
     @GetMapping
-    public ResponseEntity<List<PointOfSale>> getAllPointOfSale() {
-        return ResponseEntity.ok(pointOfSaleService.getPointOfSale());
+    public ResponseEntity<List<PointOfSale>> getAllPointOfSale(@RequestParam(defaultValue = "0") int page,
+                                                               @RequestParam(defaultValue = "10") int size) {
+        return ResponseEntity.ok(pointOfSaleService.getAllPointOfSale(page, size));
     }
 
-
+    @Override
     @PostMapping
-    public ResponseEntity<PointOfSale> addPointOfSale(@RequestBody PointOfSaleDTO pointOfSaleDTO) {
-        return ResponseEntity.ok(pointOfSaleService.createNewPointOfSale(pointOfSaleDTO));
+    public ResponseEntity<PointOfSale> addPointOfSale(@Valid @RequestBody PointOfSaleDTO pointOfSaleDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(pointOfSaleService.createNewPointOfSale(pointOfSaleDTO));
     }
 
-    @PutMapping
-    public ResponseEntity<PointOfSale> updatePointOfSale(@RequestBody PointOfSaleDTO pointOfSaleDTO) {
-        return ResponseEntity.ok(pointOfSaleService.updatePointOfSale(pointOfSaleDTO));
+    @Override
+    @PutMapping("/{id}")
+    public ResponseEntity<PointOfSale> updatePointOfSale(@PathVariable int id, @RequestBody String name) throws PointOfSaleNotFoundException {
+        return ResponseEntity.status(HttpStatus.OK).body(pointOfSaleService.updatePointOfSale(id, name));
     }
 
+    @Override
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletePointOfSale(@PathVariable int id) {
-        pointOfSaleService.deletePointOfSale(id);
-        return ResponseEntity.ok("Successfully Deleted.");
-    }
-
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
+    public ResponseEntity<Void> deletePointOfSale(@PathVariable int id) {
+        try{
+            pointOfSaleService.deletePointOfSale(id);
+            return ResponseEntity.ok().build();
+        } catch (PointOfSaleNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 }
