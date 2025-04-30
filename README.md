@@ -1,5 +1,7 @@
 # Java Challenge
 
+Esta es una API REST para la gestión de puntos de venta, desarrollada con Spring Boot. Permite administrar la información de los puntos de venta como calcular rutas con costos mínimos entre ellos. Todo el sistema está contenerizado usando Podman y utiliza MySQL como base de datos principal.
+
 ## Herramientas Utilizadas
 
 - Java 17  
