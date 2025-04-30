@@ -38,8 +38,6 @@ git clone (https://github.com/franndelgado/java-challenge)
 
 3. **Puerto de la aplicación** en `http://localhost:8080`.
 
----
-
 ### 4. Detener los contenedores
 
 Para detener el proyecto, ejecuta:
@@ -200,3 +198,7 @@ Para detener el proyecto, ejecuta:
     ...
 ]
 ```
+---
+## Documentación de la API
+
+Una vez corriendo la aplicación podes mirar la documentación de Swagger en: (http://localhost:8080/swagger-ui/index.html)
