@@ -28,6 +28,24 @@ Asegurarse de tener instaladas las siguientes herramientas en tu sistema:
 ```bash
 git clone (https://github.com/franndelgado/java-challenge)
 ```
+1. **Construir el proyecto** (si no lo hiciste antes):
+
+   `./mvnw clean package -DskipTests`
+
+2. **Levantar los contenedores** con Podman:
+
+   `podman-compose up --detach`
+
+3. **Puerto de la aplicación** en `http://localhost:8080`.
+
+---
+
+### 4. Detener los contenedores
+
+Para detener el proyecto, ejecuta:
+
+`podman-compose down`
+
 ---
 
 ## Pruebas de Postman:
