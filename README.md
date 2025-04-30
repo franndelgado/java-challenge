@@ -26,9 +26,9 @@ Asegurarse de tener instaladas las siguientes herramientas en tu sistema:
 ### 1. Clonar el repositorio
 
 ```bash
-git clone (https://github.com/franndelgado/java-challenge)
+git clone https://github.com/franndelgado/java-challenge
 ```
-1. **Construir el proyecto** (si no lo hiciste antes):
+1. **Construir el proyecto**:
 
    `./mvnw clean package -DskipTests`
 
@@ -198,6 +198,7 @@ Para detener el proyecto, ejecuta:
     ...
 ]
 ```
+Para más facilidad el archivo "Challenge Java.postman collection.json" contienede la colección creada de Postman para probar cada endpoint.
 ---
 ## Documentación de la API
 
