@@ -1,9 +1,6 @@
 package com.project.java_challenge.handler;
 
-import com.project.java_challenge.exceptions.InvalidAccreditationRequestBodyException;
-import com.project.java_challenge.exceptions.MinimumCostPathException;
-import com.project.java_challenge.exceptions.PointOfSaleCostNotFoundException;
-import com.project.java_challenge.exceptions.PointOfSaleNotFoundException;
+import com.project.java_challenge.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;

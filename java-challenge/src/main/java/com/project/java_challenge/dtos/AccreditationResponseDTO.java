@@ -1,22 +1,16 @@
 package com.project.java_challenge.dtos;
 
- import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
- import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
+@AllArgsConstructor
 public class AccreditationResponseDTO {
 
-    private int pointOfSaleId;
-    private Long amount;
-    private LocalDate date;
+    private Integer idPointOfSale;
+    private Double amount;
+    private LocalDateTime receptionDate;
     private String pointOfSaleName;
-
-    public AccreditationResponseDTO(int pointOfSaleId, Long amount, LocalDate date, String pointOfSaleName) {
-        this.pointOfSaleId = pointOfSaleId;
-        this.amount = amount;
-        this.date = date;
-        this.pointOfSaleName = pointOfSaleName;
-    }
-
 }

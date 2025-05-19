@@ -11,4 +11,3 @@ public interface CostService {
     void deletePointOfSaleCost(int idA, int idB);
     String searchPointOfSaleCost(Integer id);
 }
-

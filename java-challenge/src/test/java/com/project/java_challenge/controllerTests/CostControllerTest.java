@@ -74,7 +74,7 @@ class CostControllerTest {
         when(costService.createNewPointOfSaleCost(any())).thenReturn(pointOfSaleCost);
 
         mockMvc.perform(post("/api/costs")
-                        .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(pointOfSaleCostDTO)))
+                .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(pointOfSaleCostDTO)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.idA").value(1));
     }
@@ -102,8 +102,8 @@ class CostControllerTest {
         doNothing().when(costService).deletePointOfSaleCost(1,2);
 
         mockMvc.perform(delete("/api/costs")
-                        .param("idA", "1")
-                        .param("idB", "2"))
+                .param("idA", "1")
+                .param("idB", "2"))
                 .andExpect(status().isOk());
     }
 
@@ -135,8 +135,8 @@ class CostControllerTest {
         when(pointOfSaleGraphService.getMinimumCostPath(1, 3)).thenReturn(response);
 
         mockMvc.perform(get("/api/costs/minimumPath")
-                        .param("from", "1")
-                        .param("to", "3"))
+                .param("from", "1")
+                .param("to", "3"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.totalCost").value(10))
                 .andExpect(jsonPath("$.path[0]").value("A"));

@@ -7,6 +7,98 @@
 	},
 	"item": [
 		{
+			"name": "Spring Security",
+			"item": [
+				{
+					"name": "http://localhost:8080/api/users/register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"username\": \"admin3\",\r\n   \"password\": \"admin123\",\r\n   \"admin\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Roberto\",\r\n    \"password\": \"robert123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/users",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Points of Sale",
 			"item": [
 				{
@@ -25,7 +117,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/point-of-sale?page=1&size=10",
+							"raw": "http://localhost:8080/api/point-of-sale?page=0&size=10",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -38,7 +130,7 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "0"
 								},
 								{
 									"key": "size",
@@ -57,7 +149,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjIiLCJhdXRob3JpdGllcyI6Ilt7XCJhdXRob3JpdHlcIjpcIlJPTEVfQURNSU5cIn0se1wiYXV0aG9yaXR5XCI6XCJST0xFX1VTRVJcIn1dIiwidXNlcm5hbWUiOiJhZG1pbjIiLCJleHAiOjE3NDQyMzExODAsImlhdCI6MTc0NDIyNzU4MH0.AFvRB3R_cd_QaKUTOcKGn88AYcnnnL77iuqlsz9jgH4",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjUiLCJhdXRob3JpdGllcyI6Ilt7XCJhdXRob3JpdHlcIjpcIlJPTEVfQURNSU5cIn0se1wiYXV0aG9yaXR5XCI6XCJST0xFX1VTRVJcIn1dIiwidXNlcm5hbWUiOiJhZG1pbjUiLCJleHAiOjE3NDcxNjQ1ODUsImlhdCI6MTc0NzE2MDk4NX0._9tjTKXOBPErhjzXMAtsmvw2I0yY8e-3otS3lYxjkvw",
 									"type": "string"
 								}
 							]
@@ -66,7 +158,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"La rioja\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Chaco\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -91,18 +183,29 @@
 				{
 					"name": "http://localhost:8080/point-of-sale/2",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/point-of-sale/46",
+							"raw": "http://localhost:8080/api/point-of-sale/12",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"api",
 								"point-of-sale",
-								"46"
+								"12"
 							]
 						}
 					},
@@ -112,28 +215,37 @@
 					"name": "http://localhost:8080/point-of-sale",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JlcnRvIiwiYXV0aG9yaXRpZXMiOiJbe1wiYXV0aG9yaXR5XCI6XCJST0xFX0FETUlOXCJ9LHtcImF1dGhvcml0eVwiOlwiUk9MRV9VU0VSXCJ9XSIsInVzZXJuYW1lIjoiUm9iZXJ0byIsImV4cCI6MTc0NzIzNDQwNiwiaWF0IjoxNzQ3MjMwODA2fQ.E2hLzYNy3tWdTITYKwGt_qdndqIjgWRbzq37hcaOozw",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 2,\r\n    \"name\": \"CABA\" \r\n}",
+							"raw": "Name",
 							"options": {
 								"raw": {
-									"language": "json"
+									"language": "text"
 								}
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/point-of-sale",
+							"raw": "http://localhost:8080/api/point-of-sale/156",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"point-of-sale"
+								"api",
+								"point-of-sale",
+								"156"
 							]
 						}
 					},
@@ -177,13 +289,20 @@
 					"name": "http://localhost:8080/costs",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idA\": 10,\r\n    \"idB\": 10,\r\n    \"cost\": 100\r\n}",
+							"raw": "{\r\n    \"idA\": 11,\r\n    \"idB\": 1,\r\n    \"cost\": 222\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -191,13 +310,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/costs",
+							"raw": "http://localhost:8080/api/costs",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"api",
 								"costs"
 							]
 						}
@@ -213,23 +333,24 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/costs?idA=9&idB=9",
+							"raw": "http://localhost:8080/api/costs?idA=1&idB=",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"api",
 								"costs"
 							],
 							"query": [
 								{
 									"key": "idA",
-									"value": "9"
+									"value": "1"
 								},
 								{
 									"key": "idB",
-									"value": "9"
+									"value": ""
 								}
 							]
 						}
@@ -277,7 +398,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/costs/minimumPath?from=1&to=5",
+							"raw": "http://localhost:8080/api/costs/minimumPath?from=1&to=2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -295,7 +416,7 @@
 								},
 								{
 									"key": "to",
-									"value": "5"
+									"value": "2"
 								}
 							]
 						}
@@ -305,19 +426,26 @@
 			]
 		},
 		{
-			"name": "Accreditation",
+			"name": "AccreditationV2",
 			"item": [
 				{
-					"name": "http://localhost:8080/accreditations",
+					"name": "http://localhost:8080/api/accreditations",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGhvcml0aWVzIjoiW3tcImF1dGhvcml0eVwiOlwiUk9MRV9BRE1JTlwifSx7XCJhdXRob3JpdHlcIjpcIlJPTEVfVVNFUlwifV0iLCJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzQ3MTY1MzI0LCJpYXQiOjE3NDcxNjE3MjR9.BZzV4q2UjfiMfe1ilVOmiQvVKiebacsvX8JO8r3kWe0",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"pointOfSaleId\": 2,\r\n    \"amount\":504\r\n}",
+							"raw": "{\r\n    \"pointOfSaleId\": 8,\r\n    \"amount\": 888.9\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -343,7 +471,14 @@
 					"name": "http://localhost:8080/api/accreditations",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGhvcml0aWVzIjoiW3tcImF1dGhvcml0eVwiOlwiUk9MRV9BRE1JTlwifSx7XCJhdXRob3JpdHlcIjpcIlJPTEVfVVNFUlwifV0iLCJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNzQ3MTY1MzI0LCJpYXQiOjE3NDcxNjE3MjR9.BZzV4q2UjfiMfe1ilVOmiQvVKiebacsvX8JO8r3kWe0",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
@@ -363,6 +498,35 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEiLCJhdXRob3JpdGllcyI6Ilt7XCJhdXRob3JpdHlcIjpcIlJPTEVfVVNFUlwifV0iLCJ1c2VybmFtZSI6ImFkbWluMSIsImV4cCI6MTc0NzA4MzQ4NSwiaWF0IjoxNzQ3MDc5ODg1fQ.gF47FsggvOJyvKyj2psO2D4SjxC6W9M1XCjFJubCAyc",
+			"type": "string"
 		}
 	]
 }

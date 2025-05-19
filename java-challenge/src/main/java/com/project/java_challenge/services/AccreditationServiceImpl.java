@@ -2,38 +2,29 @@ package com.project.java_challenge.services;
 
 import com.project.java_challenge.dtos.AccreditationDTO;
 import com.project.java_challenge.dtos.AccreditationResponseDTO;
-import com.project.java_challenge.dtos.PointOfSaleDTO;
 import com.project.java_challenge.exceptions.InvalidAccreditationRequestBodyException;
+import com.project.java_challenge.exceptions.PointOfSaleNotFoundException;
 import com.project.java_challenge.models.Accreditation;
+import com.project.java_challenge.models.PointOfSale;
 import com.project.java_challenge.repositories.AccreditationRepository;
+
+import com.project.java_challenge.repositories.PointOfSaleRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
 public class AccreditationServiceImpl implements AccreditationService {
 
     private final AccreditationRepository accreditationRepository;
+    private final PointOfSaleRepository pointOfSaleRepository;
 
-    public AccreditationServiceImpl(AccreditationRepository accreditationRepository) {
+    public AccreditationServiceImpl(AccreditationRepository accreditationRepository, PointOfSaleRepository pointOfSaleRepository) {
         this.accreditationRepository = accreditationRepository;
+        this.pointOfSaleRepository = pointOfSaleRepository;
     }
-
-    private final List<PointOfSaleDTO> pointOfSaleDTOList = List.of(
-            new PointOfSaleDTO(1, "CABA"),
-            new PointOfSaleDTO(2, "GBA_1"),
-            new PointOfSaleDTO(3, "GBA_2"),
-            new PointOfSaleDTO(4, "Santa Fe"),
-            new PointOfSaleDTO(5, "Córdoba"),
-            new PointOfSaleDTO(6, "Misiones"),
-            new PointOfSaleDTO(7, "Salta"),
-            new PointOfSaleDTO(8, "Chubut"),
-            new PointOfSaleDTO(9, "Santa Cruz"),
-            new PointOfSaleDTO(10, "Catamarca")
-    );
 
     /***
      * POST Method:
@@ -44,28 +35,26 @@ public class AccreditationServiceImpl implements AccreditationService {
      * @return AccreditationResponseDTO
      */
     @Override
-    public AccreditationResponseDTO processAccreditation(AccreditationDTO accreditationDTO) throws InvalidAccreditationRequestBodyException {
+    public AccreditationResponseDTO processAccreditation(AccreditationDTO accreditationDTO) throws InvalidAccreditationRequestBodyException, PointOfSaleNotFoundException {
 
-        Optional.ofNullable(accreditationDTO.getPointOfSaleId())
+        Integer idPointOfSale = Optional.ofNullable(accreditationDTO.getPointOfSaleId())
                 .orElseThrow(() -> new InvalidAccreditationRequestBodyException("Point Of Sale Identifier cannot be null."));
         Optional.ofNullable(accreditationDTO.getAmount())
                 .orElseThrow(() -> new InvalidAccreditationRequestBodyException("Amount cannot be null."));
 
-        PointOfSaleDTO pointOfSaleDTO = pointOfSaleDTOList.stream()
-                .filter(pos -> pos.getId() == accreditationDTO.getPointOfSaleId())
-                .findFirst()
-                .orElseThrow(() -> new NoSuchElementException("Point of sale does not exist."));
+        PointOfSale pointOfSale = pointOfSaleRepository.findById(idPointOfSale)
+                .orElseThrow(() -> new PointOfSaleNotFoundException(accreditationDTO.getPointOfSaleId()));
 
         Accreditation newAccreditation = new Accreditation();
-        newAccreditation.setPointOfSaleId(accreditationDTO.getPointOfSaleId());
-        newAccreditation.setAmount(accreditationDTO.getAmount());
-        newAccreditation.setReceptionDate(LocalDate.now());
-        newAccreditation.setPointOfSaleName(pointOfSaleDTO.getName());
+        newAccreditation.setIdPointOfSale(accreditationDTO.getPointOfSaleId());
+        newAccreditation.setAmount(Double.valueOf(accreditationDTO.getAmount()));
+        newAccreditation.setReceptionDate(LocalDateTime.now());
+        newAccreditation.setPointOfSaleName(pointOfSale.getName());
 
         Accreditation accreditationSaved = accreditationRepository.save(newAccreditation);
 
         return new AccreditationResponseDTO(
-                accreditationSaved.getPointOfSaleId(),
+                accreditationSaved.getIdPointOfSale(),
                 accreditationSaved.getAmount(),
                 accreditationSaved.getReceptionDate(),
                 accreditationSaved.getPointOfSaleName()

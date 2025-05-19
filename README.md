@@ -1,10 +1,9 @@
 # Java Challenge
 
-Esta es una API REST para la gestión de puntos de venta, desarrollada con Spring Boot. Permite administrar la información de los puntos de venta como calcular rutas con costos mínimos entre ellos. Todo el sistema está contenerizado usando Podman y utiliza MySQL como base de datos principal.
-
 ## Herramientas Utilizadas
 
-- Java 17  
+- Java 17
+- Visual Studio Code
 - Spring Boot 3.4.2 
 - MySQL 8  
 - Redis (Para caching en memoria)  
@@ -21,7 +20,7 @@ Asegurarse de tener instaladas las siguientes herramientas en tu sistema:
 
 - [Java 17]
 - [Maven]
-- [IntelliJ IDEA] u otro IDE
+- [Visual Studio Code] u otro IDE
 - [Podman]
 ---
 
@@ -29,29 +28,55 @@ Asegurarse de tener instaladas las siguientes herramientas en tu sistema:
 
 ```bash
 git clone https://github.com/franndelgado/java-challenge
+cd java-challenge
 ```
-1. **Construir el proyecto**:
-
-   `./mvnw clean package -DskipTests`
-
-2. **Levantar los contenedores** con Podman:
-
-   `podman-compose up --detach`
-
-3. **Puerto de la aplicación** en `http://localhost:8080`.
-
-### 4. Detener los contenedores
-
-Para detener el proyecto, ejecuta:
-
-`podman-compose down`
-
+### 2. Levantar contenedores:
+```bash
+podman-compose up --build
+```
+### 3. Probar los endpoints en Postman
+    Importar la colección de Postman desde el archivo "Challenge Java.postman_collection.json".
 ---
 
 ## Pruebas de Postman:
+### Registro y Login de usuario:
+Primero se deberá crer un nuevo usuario:
+- **Método**: POST
+- **URL**: `http://localhost:8080/api/users/register`
+- **Request Body Example**:
+```json
+{
+   "username": "username",
+   "password": "password123",
+   "admin": true
+}
+```
+Una vez creado el usuario, deberá loggearse:
+- **Método**: POST
+- **URL**: `http://localhost:8080/login`
+- **Request Body Example**:
+```json
+{
+   "username": "username",
+   "password": "password123"
+}
+```
+- **Respuesta**:
+```json
+{
+    "message": "User username successfully logged in",
+    "token": "token",
+    "username": "username"
+}
+```
+También se pueden obtener todos los usuarios registrados:
+- **Método**: GET
+- **URL**: `http://localhost:8080/api/users`
+
+Una vez que se obtiene el token, ya pueden realizarse las distintas llamadas a la API.
 
 ### Parte 1: Caché en memoria Puntos de venta
-- **Metodo**: GET
+- **Método**: GET
 - **URL**: `http://localhost:8080/api/point-of-sale`
 - **Respuesta**:
 ```json
@@ -200,9 +225,3 @@ Para detener el proyecto, ejecuta:
     ...
 ]
 ```
-Para más facilidad el archivo "Challenge Java.postman collection.json" contienede la colección creada de Postman para probar cada endpoint.
-
----
-## Documentación de la API
-
-Una vez corriendo la aplicación podes mirar la documentación de Swagger en: (http://localhost:8080/swagger-ui/index.html)

@@ -1,35 +1,24 @@
 package com.project.java_challenge.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-@Entity
+@Document(collection = "accreditationV2")
 @Data
+@AllArgsConstructor
 public class Accreditation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private String id;
 
-    private int pointOfSaleId;
-
-    private Long amount;
-
+    private Double amount;
+    private Integer idPointOfSale;
+    private LocalDateTime receptionDate;
     private String pointOfSaleName;
-
-    private LocalDate receptionDate;
-
-    public Accreditation(Long amount, int pointOfSaleId, String pointOfSaleName, LocalDate receptionDate) {
-        this.amount = amount;
-        this.pointOfSaleId = pointOfSaleId;
-        this.pointOfSaleName = pointOfSaleName;
-        this.receptionDate = receptionDate;
-    }
 
     public Accreditation() {
 
